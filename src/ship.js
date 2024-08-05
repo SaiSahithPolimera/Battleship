@@ -10,7 +10,8 @@ const Ships = () => {
       },
       isSunk: function () {
         if (this.hitCount === this.length) {
-          return true;
+          this.sunk =  true;
+          return this.sunk;
         } else {
           return this.sunk;
         }
@@ -26,7 +27,8 @@ const Ships = () => {
       },
       isSunk: function () {
         if (this.hitCount === this.length) {
-          return true;
+          this.sunk = true;
+          return this.sunk;
         } else {
           return this.sunk;
         }
@@ -42,7 +44,8 @@ const Ships = () => {
       },
       isSunk: function () {
         if (this.hitCount === this.length) {
-          return true;
+          this.sunk = true;
+          return this.sunk;
         } else {
           return this.sunk;
         }
@@ -58,7 +61,8 @@ const Ships = () => {
       },
       isSunk: function () {
         if (this.hitCount === this.length) {
-          return true;
+          this.sunk =  true;
+          return this.sunk;
         } else {
           return this.sunk;
         }
