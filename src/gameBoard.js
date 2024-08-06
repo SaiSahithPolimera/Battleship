@@ -64,6 +64,9 @@ const gameBoard = () => {
   };
 
   const getBoard = () => {
+    if (board.length === 0) {
+      initializeBoard();
+    }
     return board;
   };
   return { initializeBoard, getBoard, placeShip, receiveAttack, report };
