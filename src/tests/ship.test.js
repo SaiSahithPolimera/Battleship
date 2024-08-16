@@ -1,4 +1,4 @@
-const Ships = require("./ship");
+const Ships = require("../utils/ship");
 
 const ships = Ships();
 

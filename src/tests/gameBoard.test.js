@@ -1,4 +1,4 @@
-const gameBoard = require("./gameBoard");
+const gameBoard = require("../utils/gameBoard");
 const GameBoard = gameBoard();
 
 beforeEach(() => {

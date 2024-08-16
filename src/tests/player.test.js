@@ -1,4 +1,4 @@
-const player = require("./player");
+const player = require("../utils/player");
 
 const Players = player();
 

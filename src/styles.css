@@ -1,0 +1,45 @@
+#mainContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#battleShip {
+  opacity: 0.9;
+  width: 6%;
+  border-radius: 10%;
+}
+
+#headingImg {
+  width: 19%;
+  height: 40%;
+}
+
+#gameBoard div {
+  display: flex;
+}
+
+div[id^='cell'] {
+  border: 1px solid black;
+}
+
+#shipContainer {
+  display: flex;
+  padding: 12px;
+  gap: 4px;
+  flex-direction: column;
+}
+
+#shipContainer img {
+  width: 15%;
+}
+
+#gameBoardContainer {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+img.hide{
+  display: none;
+}
