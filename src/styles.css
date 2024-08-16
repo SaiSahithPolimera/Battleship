@@ -19,27 +19,61 @@
   display: flex;
 }
 
-div[id^='cell'] {
+div[id^="cell"] {
   border: 1px solid black;
+}
+
+#real,
+#computer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #shipContainer {
   display: flex;
-  padding: 12px;
-  gap: 4px;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
-#shipContainer img {
-  width: 15%;
+#shipContainer img#\33 {
+  width: 16%;
+  height: 52px;
+}
+#shipContainer img#\34 {
+  width: 26%;
+}
+#shipContainer img#\35 {
+  width: 36%;
+}
+#shipContainer img#\36 {
+  width: 32%;
+}
+#gameBoard img#\33 {
+  width: 280%;
+}
+#gameBoard img#\34 {
+  width: 410%;
+}
+#gameBoard img#\35 {
+  width: auto;
+}
+#gameBoard img#\36 {
+  width: 410%;
 }
 
 #gameBoardContainer {
-  padding: 25px;
+  padding: 50px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
 }
 
-img.hide{
+img.hide {
   display: none;
+}
+
+.drag-over {
+  background-color: red;
 }

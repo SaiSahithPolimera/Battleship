@@ -22,18 +22,27 @@ const gameBoard = () => {
       colPosition === undefined ||
       shipIndex === undefined
     ) {
-      return;
+      return false;
     } else {
       const ship = ships[shipIndex - 1];
       if (axis === 0) {
         for (let i = 0; i < ship.length; i++) {
-          board[rowPosition - 1 + i][colPosition - 1] = shipIndex.toString();
+          if (board[rowPosition - 1 + i][colPosition - 1] === "") {
+            board[rowPosition - 1 + i][colPosition - 1] = shipIndex.toString();
+          } else {
+            return false;
+          }
         }
       } else {
         for (let i = 0; i < ship.length; i++) {
-          board[rowPosition - 1][colPosition - 1 + i] = shipIndex.toString();
+          if (board[rowPosition - 1][colPosition - 1 + i] === "") {
+            board[rowPosition - 1][colPosition - 1 + i] = shipIndex.toString();
+          } else {
+            return false;
+          }
         }
       }
+      return true;
     }
   };
 

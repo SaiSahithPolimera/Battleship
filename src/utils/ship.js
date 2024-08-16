@@ -10,7 +10,7 @@ const Ships = () => {
       },
       isSunk: function () {
         if (this.hitCount === this.length) {
-          this.sunk =  true;
+          this.sunk = true;
           return this.sunk;
         } else {
           return this.sunk;
@@ -36,7 +36,7 @@ const Ships = () => {
     },
     {
       name: "Zinnia",
-      length: 6,
+      length: 5,
       sunk: false,
       hitCount: 0,
       hit: function () {
@@ -53,7 +53,7 @@ const Ships = () => {
     },
     {
       name: "Wielingen",
-      length: 8,
+      length: 6,
       sunk: false,
       hitCount: 0,
       hit: function () {
@@ -61,7 +61,7 @@ const Ships = () => {
       },
       isSunk: function () {
         if (this.hitCount === this.length) {
-          this.sunk =  true;
+          this.sunk = true;
           return this.sunk;
         } else {
           return this.sunk;
