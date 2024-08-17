@@ -23,27 +23,50 @@ const gameBoard = () => {
       shipIndex === undefined
     ) {
       return false;
-    } else {
-      const ship = ships[shipIndex - 1];
-      if (axis === 0) {
-        for (let i = 0; i < ship.length; i++) {
-          if (board[rowPosition - 1 + i][colPosition - 1] === "") {
-            board[rowPosition - 1 + i][colPosition - 1] = shipIndex.toString();
-          } else {
-            return false;
-          }
-        }
-      } else {
-        for (let i = 0; i < ship.length; i++) {
-          if (board[rowPosition - 1][colPosition - 1 + i] === "") {
-            board[rowPosition - 1][colPosition - 1 + i] = shipIndex.toString();
-          } else {
-            return false;
-          }
+    }
+
+    const ship = ships[shipIndex - 1];
+    let indicator = 0;
+
+    const checkForOverlap = (row, col, length, axis) => {
+      for (let postionCounter = 0; postionCounter < length; postionCounter++) {
+        const r = axis === 0 ? row + postionCounter : row;
+        const c = axis === 1 ? col + postionCounter : col;
+        if (board[r][c] !== "" && board[r][c] !== shipIndex.toString()) {
+          return false;
         }
       }
       return true;
+    };
+
+    const clearOldPosition = (row, col, length, axis) => {
+      for (let postionCounter = 0; postionCounter < length; postionCounter++) {
+        const r = axis === 0 ? row + postionCounter : row;
+        const c = axis === 1 ? col + postionCounter : col;
+        if (board[r][c] === shipIndex.toString()) {
+          board[r][c] = "";
+        }
+      }
+    };
+
+    if (!checkForOverlap(rowPosition - 1, colPosition - 1, ship.length, axis)) {
+      return false;
     }
+
+    clearOldPosition(rowPosition - 1, colPosition - 1, ship.length, axis);
+
+    for (
+      let postionCounter = 0;
+      postionCounter < ship.length;
+      postionCounter++
+    ) {
+      const r = axis === 0 ? rowPosition - 1 + postionCounter : rowPosition - 1;
+      const c = axis === 1 ? colPosition - 1 + postionCounter : colPosition - 1;
+      board[r][c] = shipIndex.toString();
+      indicator++;
+    }
+
+    return ship.length === indicator;
   };
 
   const receiveAttack = (rowPos, colPos) => {
