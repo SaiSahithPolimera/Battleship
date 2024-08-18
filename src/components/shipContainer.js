@@ -16,6 +16,8 @@ const fixID = (id, length) => {
   return "cell" + match[1].charAt(0) + (cellNumber - (cellNumber - difference));
 };
 
+const userBoard = gameBoard();
+
 const appendShip = (ship) => {
   const shipContainer = document.getElementById("shipContainer");
   ship.classList.remove("hide");
@@ -29,10 +31,9 @@ const showMessage = (message) => {
 
 const shipContainer = (playerID) => {
   const shipContainer = document.createElement("div");
-  const board = gameBoard();
-  board.initializeBoard();
-  board.getBoard();
-
+  userBoard.initializeBoard();
+  userBoard.getBoard();
+  shipContainer.className = playerID;
   shipContainer.id = "shipContainer";
   const ships = [
     { length: 3, path: Turnout, name: "Turnout" },
@@ -101,15 +102,14 @@ const shipContainer = (playerID) => {
             return;
           }
           if (
-            board.placeShip(
+            userBoard.placeShip(
               RowPos + 1,
               columnPos + 1,
               currentShipIndex + 1,
               1,
             ) === true
           ) {
-            console.log(board.getBoard());
-            
+
             if (ship.parentNode) {
               ship.parentNode.removeChild(ship);
             }
@@ -120,16 +120,17 @@ const shipContainer = (playerID) => {
             );
             if (columnPosition + Number(id) > 10) {
               const fixedID = fixID(targetCell.id, id);
-              const fixedPosition = document.getElementById(fixedID);
+              const fixedPosition = document.getElementById(fixedID);              
               fixedPosition.appendChild(ship);
             } else {
+              
               targetCell.appendChild(ship);
             }
 
             ship.classList.remove("hide");
           }
           if (
-            board.placeShip(
+            userBoard.placeShip(
               RowPos + 1,
               columnPos + 1,
               currentShipIndex + 1,
@@ -149,4 +150,4 @@ const shipContainer = (playerID) => {
   return shipContainer;
 };
 
-export { shipContainer };
+export { shipContainer, userBoard };

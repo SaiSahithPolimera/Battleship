@@ -1,8 +1,12 @@
 import player from "../utils/player";
-import { board } from "./board";
+import { board, isGameOver } from "./board";
 import { shipContainer } from "./shipContainer";
 import attackButtonImage from "../images/attackButton.jpg";
+import gameBoard from "../utils/gameBoard";
 
+const computerBoard = gameBoard();
+computerBoard.initializeBoard();
+let shipCount = 0;
 const controller = () => {
   const players = player();
   const mainContainer = document.createElement("div");
@@ -46,38 +50,80 @@ const controller = () => {
     }
   });
 
-  attackButton.addEventListener("click", () => {
-    const realPlayer = document.getElementById("real");
-    if (realPlayer.lastChild.hasChildNodes()) {
-      //
-      typeText(statusIndicator, "", 0);
-      typeText(
-        statusIndicator,
-        "You need to place all ships before attacking",
-        100,
-      );
-    } else {
-      typeText(
-        statusIndicator,
-        "Ready to attack! click on enemy cells to launch your missiles",
-        100,
-      );
-    }
-  });
-
   document.addEventListener("DOMContentLoaded", () => {
     typeText(
       statusIndicator,
       "Place your ships and press attack button to start..",
       100,
     );
+    let placedShips = [];
+    const computerShips = document.querySelectorAll("#shipContainer .computer");
+    const computerShipContainer = document.getElementById("computer").lastChild;
+    let interval = setInterval(() => {
+      if (shipCount === 4) {
+        clearInterval(interval);
+        typeText(statusIndicator, "Enemy placed the ships!", 100);
+      }
+      let coordinates = generateCoordinates();
+      if (!placedShips.includes(coordinates.shipIndex)) {
+        if (
+          computerBoard.placeShip(
+            coordinates.rowPosition + 1,
+            coordinates.colPosition + 1,
+            coordinates.shipIndex + 1,
+            coordinates.axis,
+          ) === true
+        ) {
+          placedShips.push(coordinates.shipIndex);
+          computerShipContainer.removeChild(
+            computerShips[coordinates.shipIndex],
+          );
+
+          shipCount++;
+        }
+      }
+    }, 1000);
   });
+
+  attackButton.addEventListener("click", attack);
   return mainContainer;
 };
 
 let timeOutID;
 
-function typeText(element, text, speed) {
+const attack = () => {
+  {
+    if (isGameOver === true) {
+      window.location.reload();
+    }
+    const realPlayer = document.getElementById("real");
+    if (realPlayer.lastChild.hasChildNodes()) {
+      //
+      typeText(statusIndicator, "", 0);
+      typeText(
+        statusIndicator,
+        "You need to place all ships before attacking!",
+        100,
+      );
+    } else {
+      if (shipCount === 4) {
+        typeText(
+          statusIndicator,
+          "Ready to attack! click on enemy cells to launch your missiles",
+          100,
+        );
+      } else {
+        typeText(
+          statusIndicator,
+          "Please wait until enemy finishes placing ships",
+          100,
+        );
+      }
+    }
+  }
+};
+
+const typeText = (element, text, speed) => {
   if (timeOutID !== undefined) {
     clearTimeout(timeOutID);
   }
@@ -92,6 +138,14 @@ function typeText(element, text, speed) {
     }
   }
   type();
-}
+};
 
-export { controller };
+const generateCoordinates = () => {
+  let axis = 1;
+  let rowPosition = Math.floor(Math.random() * 10);
+  let colPosition = Math.floor(Math.random() * 10);
+  let shipIndex = Math.floor(Math.random() * 4);
+  return { rowPosition, colPosition, shipIndex, axis };
+};
+
+export { controller, computerBoard, typeText, generateCoordinates };

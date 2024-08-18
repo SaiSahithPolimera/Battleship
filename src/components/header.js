@@ -28,7 +28,7 @@ const header = () => {
   source.type = "audio/mpeg";
   audio.appendChild(source);
   audio.id = "gameAudio";
-  // audio.autoplay = true;
+  audio.autoplay = true;
   let toggle = true;
   soundButton.id = "soundButton";
   soundButton.src =
@@ -56,7 +56,7 @@ const header = () => {
   section.appendChild(div);
   section.appendChild(audio);
   document.addEventListener("DOMContentLoaded", () => {
-    // audio.play();
+    audio.play();
   });
   return section;
 };
