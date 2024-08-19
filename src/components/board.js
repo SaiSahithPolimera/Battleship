@@ -77,11 +77,10 @@ const board = (playerId) => {
       cell.id = "cell" + rowCounter + colCounter;
       const image = document.createElement("img");
       cell.className = playerId;
-      if (isGameOver === true) {
-        alert("Game over! Restart the game to play again!");
-        return;
-      }
       cell.addEventListener("click", () => {
+        if (isGameOver === true) {
+          alert("Game over! Restart to play new game");
+        }
         const statusIndicator = document.getElementById("statusIndicator");
         const computerShipContainer =
           document.getElementById("computer").lastChild;
